@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    // id 'application'
+    // id 'com.github.johnrengelman.shadow' version '4.0.3'
+}
+
+// mainClassName = 'de.zwb3.gempirlogmigration.LogMigrator'
+
+// sourceCompatibility = 1.8
+// targetCompatibility = 1.8
+
+/*
+jar {
+    manifest {
+        attributes 'Main-Class': 'de.zwb3.gempirlogmigration.LogMigrator'
+    }
+}
+*/
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compileOnly 'org.jetbrains:annotations:15.0'
+    compileOnly 'net.jcip:jcip-annotations:1.0'
+}
