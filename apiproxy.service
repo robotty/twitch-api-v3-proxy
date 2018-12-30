@@ -1,0 +1,15 @@
+[Unit]
+Description=twitch-api-v3-proxy
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/apiproxy
+ExecStart=/opt/apiproxy/bin/twitch-api-v3-proxy
+RestartSec=1
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

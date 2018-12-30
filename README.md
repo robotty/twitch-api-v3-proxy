@@ -18,8 +18,11 @@ You can also set host and address to have the webserver listen on.
 
 ## Run
 
-    cp ./build/libs/twitch-api-v3-proxy-all.jar .
-    java -jar twitch-api-v3-proxy-all.jar
+    # place twitch-api-v3-proxy-boot.tar in an empty directory and run:
+    tar xvz twitch-api-v3-proxy-boot.tar --strip-components=1
+    ./bin/twitch-api-v3-proxy-boot
+
+Make sure `application.properties` is present in the working directory.
 
 ## Usage
 
@@ -30,3 +33,7 @@ translation 100% transparently.
 
 You can also print a simple status message for example
 with a chatbot by querying `http://localhost:7221/apiproxy/status`.
+
+## systemd service file
+
+Example systemd is provided in the repo as `apiproxy.service`.
