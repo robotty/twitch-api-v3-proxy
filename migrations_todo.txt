@@ -28,17 +28,52 @@ https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/
 For testing purposes, get oauth token:
 https://id.twitch.tv/oauth2/authorize?client_id=asdadasdasdadasdasdasd&redirect_uri=http://localhost&response_type=token&scope=scope_one+scope_two
 
-Endpoints to support:
-=====================
+Endpoints to support (minimum):
+===============================
+
+
+
+
+CHANNEL
+=======
 
 https://github.com/pajlada/pajbot/blob/master/pajbot/apiwrappers.py#L297
 get list of subscribers
-GET /channels/:channel/subscriptions
+v3 GET https://api.twitch.tv/kraken/channels/:channel/subscriptions
+v5 GET https://api.twitch.tv/kraken/channels/<channel ID>/subscriptions
 https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/subscriptions.md#get-channelschannelsubscriptions
 https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-subscribers
-OAuth Scope required: channel_subscriptions
-GET https://api.twitch.tv/kraken/channels/<channel ID>/subscriptions
 
+Game: https://github.com/pajlada/pajbot/blob/master/pajbot/apiwrappers.py#L404
+Title: https://github.com/pajlada/pajbot/blob/master/pajbot/apiwrappers.py#L418
+Set game and title:
+v3 PUT https://api.twitch.tv/kraken/channels/:channel
+v5 PUT https://api.twitch.tv/kraken/channels/<channel ID>
+https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/channels.md#put-channelschannel
+https://dev.twitch.tv/docs/v5/reference/channels/#update-channel
+
+
+https://github.com/pajlada/pajbot/blob/master/pajbot/models/stream.py#L181
+Get Videos
+v3 GET https://api.twitch.tv/kraken/channels/:channel/videos
+v5 GET https://api.twitch.tv/kraken/channels/<channel ID>/videos
+https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/videos.md#get-channelschannelvideos
+
+
+https://github.com/pajlada/pajbot/blob/master/pajbot/managers/connection.py#L146
+Get chat servers from data['chat_servers']
+GET /channels/:channel/chat_properties
+Special endpoint! Not documented.
+Example:
+https://api.twitch.tv/api/channels/lirik/chat_properties?client_id=96g9dzycr55iprz16qszqb1bre6jyz&api_version=5
+https://blog.decicus.com/twitch-api-endpoints/#/api/channels/%7BCHANNEL_NAME%7D/chat_properties
+Status: DONE. Hardcoded IRC servers in pajbot.
+
+
+
+
+STREAMS
+=======
 
 https://github.com/pajlada/pajbot/blob/master/pajbot/apiwrappers.py#L347
 Get stream info: (live title etc..)
@@ -46,12 +81,11 @@ GET /streams/:channel
 https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/streams.md#get-streamschannel
 
 
-Game: https://github.com/pajlada/pajbot/blob/master/pajbot/apiwrappers.py#L404
-Title: https://github.com/pajlada/pajbot/blob/master/pajbot/apiwrappers.py#L418
-Set game and title:
-PUT /channels/:channel
-https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/channels.md#put-channelschannel
 
+
+
+USERS
+=====
 
 https://github.com/pajlada/pajbot/blob/master/pajbot/apiwrappers.py#L427
 Get follow relationship (2)
@@ -69,19 +103,3 @@ https://github.com/pajlada/pajbot/blob/master/pajbot/web/utils.py#L70
 Get logo URL for channel
 GET /users/:channel
 https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/users.md#get-usersuser
-
-
-https://github.com/pajlada/pajbot/blob/master/pajbot/models/stream.py#L181
-Get Videos
-GET /channels/:channel/videos
-https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/videos.md#get-channelschannelvideos
-
-
-https://github.com/pajlada/pajbot/blob/master/pajbot/managers/connection.py#L146
-Get chat servers from data['chat_servers']
-GET /channels/:channel/chat_properties
-Special endpoint! Not documented.
-Example:
-https://api.twitch.tv/api/channels/lirik/chat_properties?client_id=96g9dzycr55iprz16qszqb1bre6jyz&api_version=5
-https://blog.decicus.com/twitch-api-endpoints/#/api/channels/%7BCHANNEL_NAME%7D/chat_properties
-Status: DONE. Hardcoded IRC servers in pajbot.

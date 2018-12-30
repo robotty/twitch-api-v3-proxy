@@ -1,0 +1,81 @@
+# lines beginning with # are treated as comments.
+# only whole-line comments are supported. (you cannot put comments AFTER route lines)
+# https://github.com/justintv/Twitch-API/tree/9991b5673734916ad8f06a5b6843e0da4b68ed9f#blocks
+# Also see the documentation on class de.zwb3.apiproxy.ApiRoutes
+# :variable path elements are segments that contain usernames that are to be translated into user IDs
+# !variable path elements are segments that contain copy-as-is variable information, e.g. team ID or video ID
+
+# BLOCKS
+GET /kraken/users/:user/blocks
+PUT /kraken/users/:user/blocks/:target
+DELETE /kraken/users/:user/blocks/:target
+
+# CHANNELS
+GET /kraken/channels/:channel
+GET /kraken/channel
+GET /kraken/channels/:channel/videos
+GET /kraken/channels/:channel/follows
+GET /kraken/channels/:channel/editors
+PUT /kraken/channels/:channel
+DELETE /kraken/channels/:channel/stream_key
+POST /kraken/channels/:channel/commercial
+GET /kraken/channels/:channel/teams
+
+# FEEDs are no longer supported. /feed endpoints are not included here.
+
+# CHAT
+GET /kraken/chat/:channel
+GET /kraken/chat/:channel/badges
+GET /kraken/chat/emoticons
+GET /kraken/chat/emoticon_images
+
+# FOLLOWS
+GET /kraken/channels/:channel/follows
+GET /kraken/users/:user/follows/channels
+GET /kraken/users/:user/follows/channels/:target
+PUT /kraken/users/:user/follows/channels/:target
+DELETE /kraken/users/:user/follows/channels/:target
+GET /kraken/streams/followed
+
+# GAMES
+GET /kraken/games/top
+
+# INGESTS
+GET /kraken/ingests
+
+# ROOT
+GET /kraken/
+
+# SEARCH
+GET /kraken/search/channels
+GET /kraken/search/streams
+GET /kraken/search/games
+
+# STREAMS
+GET /kraken/streams/:channel
+GET /kraken/streams
+GET /kraken/streams/featured
+GET /kraken/streams/summary
+GET /kraken/streams/followed
+
+# SUBSCRIPTIONS
+GET /kraken/channels/:channel/subscriptions
+GET /kraken/channels/:channel/subscriptions/:user
+GET /kraken/users/:user/subscriptions/:channel
+
+# TEAMS
+GET /kraken/teams
+GET /kraken/teams/!team
+
+# USERS
+GET /kraken/users/:user
+GET /kraken/users/:user/emotes
+GET /kraken/user
+GET /kraken/streams/followed
+
+# VIDEOS
+GET /kraken/videos/followed
+GET /kraken/videos/!id
+GET /kraken/videos/top
+GET /kraken/channels/:channel/videos
+GET /kraken/videos/followed

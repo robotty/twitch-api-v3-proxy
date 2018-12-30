@@ -1,27 +1,70 @@
 plugins {
     id 'java'
-    // id 'application'
-    // id 'com.github.johnrengelman.shadow' version '4.0.3'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '4.0.3'
+    id "org.springframework.boot" version "2.0.5.RELEASE"
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
 }
 
-// mainClassName = 'de.zwb3.gempirlogmigration.LogMigrator'
+mainClassName = 'de.zwb3.apiproxy.ApiProxy'
 
-// sourceCompatibility = 1.8
-// targetCompatibility = 1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-/*
+
 jar {
     manifest {
-        attributes 'Main-Class': 'de.zwb3.gempirlogmigration.LogMigrator'
+        attributes 'Main-Class': 'de.zwb3.apiproxy.ApiProxy'
     }
 }
-*/
 
 repositories {
     jcenter()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.SR2"
+    }
+}
+
 dependencies {
     compileOnly 'org.jetbrains:annotations:15.0'
     compileOnly 'net.jcip:jcip-annotations:1.0'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
+
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    compile group: 'com.google.guava', name: 'guava', version: '27.0-jre'
+
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+//    compile("org.springframework.cloud:spring-cloud-starter-gateway")
+//    compile("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
+//    compile("org.springframework.cloud:spring-cloud-starter-contract-stub-runner"){
+//        exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
+//    }
+
+//    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-gateway
+//    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-gateway', version: '2.0.1.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+
+    // https://mvnrepository.com/artifact/org.dmfs/oauth2-essentials
+    compile group: 'org.dmfs', name: 'oauth2-essentials', version: '0.11'
+
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+
+    // https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java
+    compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
 }
