@@ -32,8 +32,8 @@ If you are planning on using this proxy service with pajbot1,
 you can apply these patches to your pajbot1 to switch
 to the API proxy:
 
-https://github.com/RAnders00/pajbot/commit/931567c4337c39fa757d98fb5c3d1e69ecf02e9b
-https://github.com/RAnders00/pajbot/commit/0f72e9611beb6e6ad8466f145b9e4e5c5116d53e
+  - https://github.com/RAnders00/pajbot/commit/931567c4337c39fa757d98fb5c3d1e69ecf02e9b
+  - https://github.com/RAnders00/pajbot/commit/0f72e9611beb6e6ad8466f145b9e4e5c5116d53e
 
 Or just clone the whole forked project under https://github.com/RAnders00/pajbot
 
