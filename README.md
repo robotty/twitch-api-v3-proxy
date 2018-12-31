@@ -26,17 +26,6 @@ For the actual API requests, the proxy passes on your existing sent
 
 You can also set host and address to have the webserver listen on.
 
-## Patch your pajbot1
-
-If you are planning on using this proxy service with pajbot1,
-you can apply these patches to your pajbot1 to switch
-to the API proxy:
-
-  - https://github.com/RAnders00/pajbot/commit/931567c4337c39fa757d98fb5c3d1e69ecf02e9b
-  - https://github.com/RAnders00/pajbot/commit/0f72e9611beb6e6ad8466f145b9e4e5c5116d53e
-
-Or just clone the whole forked project under https://github.com/RAnders00/pajbot
-
 ## Run
 
 Ensure you have a Java 8 JRE installed, and run:
@@ -60,6 +49,17 @@ which returns a plain text response like this:
 
 > twitch-api-v3-proxy online for 10H6M49.308S,
 > 2 usernames in cache, 2016 requests served!
+
+## Patch your pajbot1
+
+If you are planning on using this proxy service with pajbot1,
+you can apply these patches to your pajbot1 to switch
+to the API proxy:
+
+  - https://github.com/RAnders00/pajbot/commit/931567c4337c39fa757d98fb5c3d1e69ecf02e9b
+  - https://github.com/RAnders00/pajbot/commit/0f72e9611beb6e6ad8466f145b9e4e5c5116d53e
+
+Or just clone the whole forked project under https://github.com/RAnders00/pajbot
 
 ## systemd service filem
 
