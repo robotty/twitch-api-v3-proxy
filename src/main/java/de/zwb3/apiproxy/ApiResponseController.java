@@ -68,7 +68,7 @@ public class ApiResponseController {
         requestCounter.incrementAndGet();
 
         // mappedPath is for example "/kraken/streams/22484632"
-        String mappedPath = mapper.mapAPIPath(request.getMethod(), request.getRequestURI());
+        String mappedPath = mapper.mapApiPath(request.getMethod(), request.getRequestURI());
 
         URI requestURI = new URIBuilder()
                 .setScheme("https")

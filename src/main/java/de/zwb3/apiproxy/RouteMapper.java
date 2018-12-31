@@ -45,7 +45,7 @@ public class RouteMapper {
      * @throws NoSuchUserException      If a username in the request URI could not be translated because the
      *                                  username is unknown.
      */
-    public String mapAPIPath(String httpMethod, String inputPath) throws ExecutionException, NoSuchUserException {
+    public String mapApiPath(String httpMethod, String inputPath) throws ExecutionException, NoSuchUserException {
         // split the given path at all forward slashes.
         // Then try to find the origin route that this is requesting.
         String[] inputSegments = StringUtils.split(inputPath, '/');
