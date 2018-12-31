@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.net.URI;
@@ -116,8 +114,10 @@ public class ApiResponseController {
         // copy body
         HttpEntity responseEntity = proxyResponse.getEntity();
         try (InputStream inputStream = responseEntity.getContent();
-             OutputStream outputStream = response.getOutputStream()) {
-            IOUtils.copy(inputStream, outputStream);
+             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+             OutputStream outputStream = response.getOutputStream();
+             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream)) {
+            IOUtils.copy(bufferedInputStream, bufferedOutputStream);
         }
 
     }
