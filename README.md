@@ -5,7 +5,17 @@ at a local endpoint.
 
 ## Build
 
+Ensure you have a Java 8 JDK installed, and run:
+
     ./gradlew build
+
+On windows, run:
+
+    gradlew build
+
+Note you do not need to build the project on the target machine,
+you can simply copy the result artifact that you built on your
+local machine to your server without any problems.
 
 ## Configure
 
@@ -17,6 +27,8 @@ For the actual API requests, the proxy passes on your existing sent
 You can also set host and address to have the webserver listen on.
 
 ## Run
+
+Ensure you have a Java 8 JRE installed, and run:
 
     # place twitch-api-v3-proxy-boot.tar in an empty directory and run:
     tar xvz twitch-api-v3-proxy-boot.tar --strip-components=1
