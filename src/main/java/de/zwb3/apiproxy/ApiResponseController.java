@@ -42,6 +42,11 @@ public class ApiResponseController {
 
     private final RouteMapper mapper;
 
+    /**
+     * This counter is incremented on every received request to the proxy endpoint.
+     */
+    private final AtomicLong requestCounter = new AtomicLong(0);
+
     @Autowired
     public ApiResponseController(@Value("${clientId}") String clientId) throws IOException {
         log.info("Initialized with clientId={}", clientId);
@@ -58,6 +63,8 @@ public class ApiResponseController {
     @RequestMapping(value = "/**", method = {GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE})
     public void proxyTwitchAPI(HttpServletRequest request, HttpServletResponse response) throws ExecutionException,
             NoSuchUserException, URISyntaxException, IOException {
+
+        requestCounter.incrementAndGet();
 
         // mappedPath is for example "/kraken/streams/22484632"
         String mappedPath = mapper.mapAPIPath(request.getMethod(), request.getRequestURI());
@@ -135,7 +142,8 @@ public class ApiResponseController {
         Duration uptimeDuration = Duration.ofMillis(uptime);
 
         String statusLine = "twitch-api-v3-proxy online for " + uptimeDuration.toString().substring(2) + ", " +
-                mapper.getUserIdResolver().getCacheCount() + " usernames in cache";
+                mapper.getUserIdResolver().getCacheCount() + " usernames in cache, " +
+                requestCounter.get() + " requests served!";
 
         return statusLine;
     }
