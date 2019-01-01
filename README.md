@@ -39,12 +39,12 @@ Make sure `application.properties` is present in the working directory.
 ## Usage
 
 Change your legacy APIv3 applications to make requests to
-`http://localhost:7221/kraken` instead of
+`http://127.0.0.1:7221/kraken` instead of
 `https://api.twitch.tv/kraken`. The API will handle the
 translation 100% transparently.
 
 You can also print a simple status message (for example
-with a chatbot) by querying `http://localhost:7221/apiproxy/status`,
+with a chatbot) by querying `http://127.0.0.1:7221/apiproxy/status`,
 which returns a plain text response like this:
 
 > twitch-api-v3-proxy online for 10H6M49.308S,
