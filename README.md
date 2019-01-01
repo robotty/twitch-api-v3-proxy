@@ -50,16 +50,26 @@ which returns a plain text response like this:
 > twitch-api-v3-proxy online for 10H6M49.308S,
 > 2 usernames in cache, 2016 requests served!
 
-## Patch your pajbot1
+## Usage with pajbot1
 
 If you are planning on using this proxy service with pajbot1,
-you can apply these patches to your pajbot1 to switch
-to the API proxy:
+you can find a patched version with the local endpoint
+and all API differences patched under this URL:
+https://github.com/RAnders00/pajbot
 
-  - https://github.com/RAnders00/pajbot/commit/931567c4337c39fa757d98fb5c3d1e69ecf02e9b
-  - https://github.com/RAnders00/pajbot/commit/0f72e9611beb6e6ad8466f145b9e4e5c5116d53e
+## Known endpoint differences
 
-Or just clone the whole forked project under https://github.com/RAnders00/pajbot
+The following endpoints are known to behave differently when using
+the v3 API proxy (because the v5 response format is different):
+
+(Check that your application is not using them, otherwise you
+have to patch these differences in your application!)
+
+  -     GET /videos/:id
+    [v3 doc](https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/videos.md#get-videosid),
+    [v5 doc](https://dev.twitch.tv/docs/v5/reference/videos/#get-video)
+    `rootObject["preview"]` is different, use `rootObject["preview"]["medium"]`
+    to get the original behaviour.
 
 ## systemd service filem
 
