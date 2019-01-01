@@ -126,8 +126,10 @@ and the proxy endpoint (`ApiResponseController#proxyTwitchApi`) will now
 proceed with making the twitch API request and proxying the response back.
 It will copy **all** input request headers over to the proxy request
 as-is, except for any `Accept` (because this needs to be a different value
-for Twitch API v5) and `Host` (for obvious reasons, this is different
-for `api.twitch.tv` rather than `127.0.0.1:7221`) headers.
+for Twitch API v5), `Host` (for obvious reasons, this is different
+for `api.twitch.tv` rather than `127.0.0.1:7221`) and `Content-Length`
+headers. On `POST` requests, the sent message body will also be sent
+on the proxy request as-is (byte-streamed).
 
 The proxy will then copy all response headers and the status code back into 
 its own response itself and afterwards start byte-streaming the twitch 
