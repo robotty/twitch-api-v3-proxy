@@ -66,8 +66,10 @@ the v3 API proxy (because the v5 response format is different):
 have to patch these differences in your application!)
 
   -     GET /videos/:id
+    
     [v3 doc](https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/videos.md#get-videosid),
     [v5 doc](https://dev.twitch.tv/docs/v5/reference/videos/#get-video)
+    
     `rootObject["preview"]` is different, use `rootObject["preview"]["medium"]`
     to get the original behaviour.
 
