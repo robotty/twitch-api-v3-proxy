@@ -30,11 +30,15 @@ You can also set host and address to have the webserver listen on.
 
 Ensure you have a Java 8 JRE installed, and run:
 
-    # place twitch-api-v3-proxy-boot.tar in an empty directory and run:
-    tar xvf twitch-api-v3-proxy-boot.tar --strip-components=1
-    ./bin/twitch-api-v3-proxy-boot
+    sudo mkdir /opt/twitch-api-v3-proxy
+    sudo tar xvf ./build/distributions/twitch-api-v3-proxy-boot.tar -C /opt/twitch-api-v3-proxy --strip-components=1
+    sudo cp ./application.properties /opt/twitch-api-v3-proxy/
+    cd /opt/twitch-api-v3-proxy
+    # run as www-data for security reasons!
+    sudo -u www-data ./bin/twitch-api-v3-proxy
 
-Make sure `application.properties` is present in the working directory.
+To run the application, make sure `application.properties`
+is present in the working directory.
 
 ## Usage
 

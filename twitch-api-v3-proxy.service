@@ -6,8 +6,8 @@ After=network.target
 Type=simple
 User=www-data
 Group=www-data
-WorkingDirectory=/opt/apiproxy
-ExecStart=/opt/apiproxy/bin/twitch-api-v3-proxy
+WorkingDirectory=/opt/twitch-api-v3-proxy
+ExecStart=/opt/twitch-api-v3-proxy/bin/twitch-api-v3-proxy
 RestartSec=1
 Restart=always
 
