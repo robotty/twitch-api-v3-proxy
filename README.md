@@ -53,9 +53,8 @@ which returns a plain text response like this:
 ## Usage with pajbot1
 
 If you are planning on using this proxy service with pajbot1,
-you can find a patched version with the local endpoint
-and all API differences patched under this URL:
-https://github.com/RAnders00/pajbot
+update your pajbot1 with the latest patches from:
+https://github.com/pajlada/pajbot
 
 ## Known endpoint differences
 
