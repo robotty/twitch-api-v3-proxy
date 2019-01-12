@@ -3,6 +3,14 @@
 Provides continued support to projects using Twitch API v3 by providing the legacy API
 at a local endpoint.
 
+## Download
+
+Download ready-made artifacts that work on all platforms here:
+https://github.com/zwb3/twitch-api-v3-proxy/releases/latest
+
+You can use these downloads instead of building the project
+yourself if your only aim is to run the project.
+
 ## Build
 
 Ensure you have a Java 8 JDK installed, and run:
