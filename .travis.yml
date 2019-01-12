@@ -1,0 +1,11 @@
+language: java
+jdk:
+- openjdk8
+
+deploy:
+  provider: releases
+  api_key:
+    secure: eB/w2dT26udxuBSr454doKXqCSM1xN5cOQM7u4VUM3gFZfmkVGHtKOAVSX3SRrk4CoNhX+dR6ig2x/q2XKc9iBTnVEtBVyZPR1mateRsoYczXbGPTdvQPcNl2GGDgB7U2OWo2CVCabJWFFRcvlfutIwL0I0XboDYUcyeE4pfjK8XBmZMCTVlZuYzhAHd2P4Dps6GIuMLQL+tg2j3GTBqun3GOKlGKg48ht8W01X8rVshjdXO2I6AZO0TpKrphl8aTEnN8AC8L0/KIjM1u8QqXOqJipFxleQJhYFhdrdwkZmHD9EaNRa+muNKLlZfgS5N48v8jJFimf/DLqOJ5vXRsCQGHKYN85BBoJmy5abFKbvhAw3ZfCGQIQrX6GJsOA+gHHxn78071/Nsx043FXR+Sxkcl/CYblTWZokJd+v6XidIe8nTb0LmNNFb1Ef4+PGOL5GeKu2tMWX8MhML+yfhfldjIAYhi5ZlhpmqAJrBeSQ3Qv4fPhZruLtR6xl1MeYFiMOcm5zNkj1myJZhgfyXR5APrdBCu2c0UqFn4KfAotSYDK6Pe/SXUifqfiG1lqajtU2YIZm0MwXzvK1HXiBmjL/odihMWyh8M4kl7RQtrqN+V2d3OHJkrZ24oJB5Fim1XqPi/34IgJbeAYFWiA6pvuLtVrXVkYg6y2nwqGy+LDo=
+  file: "./build/distributions/twitch-api-v3-proxy-boot.tar"
+  on:
+    repo: zwb3/twitch-api-v3-proxy
