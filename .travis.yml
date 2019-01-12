@@ -2,6 +2,10 @@ language: java
 jdk:
   - openjdk8
 
+branches:
+  except:
+    - /^untagged/
+
 deploy:
   skip_cleanup: true
   provider: releases
