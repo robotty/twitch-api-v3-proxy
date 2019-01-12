@@ -1,4 +1,4 @@
-# Twitch API v3 Proxy
+# Twitch API v3 Proxy [![Build Status](https://travis-ci.org/zwb3/twitch-api-v3-proxy.svg?branch=master)](https://travis-ci.org/zwb3/twitch-api-v3-proxy)
 
 Provides continued support to projects using Twitch API v3 by providing the legacy API
 at a local endpoint.
