@@ -11,6 +11,10 @@ https://github.com/zwb3/twitch-api-v3-proxy/releases/latest
 You can use these downloads instead of building the project
 yourself if your only aim is to run the project.
 
+I recommend downloading the `twitch-api-v3-proxy-boot.tar`
+(or zip if you prefer) for a full package including
+start scripts.
+
 ## Build
 
 Ensure you have a Java 8 JDK installed, and run:
