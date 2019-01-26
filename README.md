@@ -15,47 +15,59 @@ I recommend downloading the `twitch-api-v3-proxy-boot.tar`
 (or zip if you prefer) for a full package including
 start scripts.
 
-## Build
+## Install Java 8
 
-Ensure you have a Java 8 JDK installed, and run:
+Java 8 is required, older releases are not supported.
 
-    ./gradlew build
+On Debian, for example:
 
-On windows, run:
+    sudo apt update
+    sudo apt install openjdk-8-jre-headless
+    java -version
 
-    gradlew build
+Other distributions - google yourself!
 
-Note you do not need to build the project on the target machine,
-you can simply copy the result artifact that you built on your
-local machine to your server without any problems.
+## Unzip
+
+For a fresh install:
+
+    sudo mkdir /opt/twitch-api-v3-proxy
+    sudo tar xvf twitch-api-v3-proxy-boot.tar \
+      -C /opt/twitch-api-v3-proxy \
+      --strip-components=1
+
+If you are upgrading (where you dont want to override the configuration file):
+
+    sudo mkdir /opt/twitch-api-v3-proxy
+    sudo tar xvf twitch-api-v3-proxy-boot.tar \
+      -C /opt/twitch-api-v3-proxy \
+      --strip-components=1 \
+      --exclude='./twitch-api-v3-proxy-boot/application.properties'
 
 ## Configure
+
+If you downloaded a dist zip/tar, the application.properties
+will be included inside the zip/tar. If you are building from source,
+copy it from `./src/dist/application.properties.`
 
 Edit `application.properties` with your own client ID.
 This client ID is used to look up usernames to user IDs.
 For the actual API requests, the proxy passes on your existing sent
 `Authorization` header as-is.
 
-You can also set host and address to have the webserver listen on.
-
-Note: If the application.properties is not present in the
-working directory, you will get an error message like this:
-
-> `ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'apiResponseController' defined in URL [jar:file:/C:/Users/username/Projects/twitch-api-v3-proxy/build/libs/twitch-api-v3-proxy.jar!/BOOT-INF/classes!/de/zwb3/apiproxy/ApiResponseController.class]: Unexpected exception during bean creation; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'clientId' in value "${clientId}"`
+You can also set a different host and address to have the webserver listen on.
 
 ## Run
 
-Ensure you have a Java 8 JRE installed, and run:
-
-    sudo mkdir /opt/twitch-api-v3-proxy
-    sudo tar xvf ./build/distributions/twitch-api-v3-proxy-boot.tar -C /opt/twitch-api-v3-proxy --strip-components=1
-    sudo cp ./application.properties /opt/twitch-api-v3-proxy/
     cd /opt/twitch-api-v3-proxy
     # run as www-data for security reasons!
     sudo -u www-data ./bin/twitch-api-v3-proxy
 
-To run the application, make sure `application.properties`
-is present in the working directory.
+## Usage with pajbot1
+
+If you are planning on using this proxy service with pajbot1,
+update your pajbot1 with the latest patches from:
+https://github.com/pajlada/pajbot
 
 ## Usage
 
@@ -71,11 +83,19 @@ which returns a plain text response like this:
 > twitch-api-v3-proxy online for 10H6M49.308S,
 > 2 usernames in cache, 2016 requests served!
 
-## Usage with pajbot1
+## Build
 
-If you are planning on using this proxy service with pajbot1,
-update your pajbot1 with the latest patches from:
-https://github.com/pajlada/pajbot
+Ensure you have a Java 8 JDK installed, and run:
+
+    ./gradlew build
+
+On windows, run:
+
+    gradlew build
+
+Note you do not need to build the project on the target machine,
+you can simply copy the result artifact that you built on your
+local machine to your server without any problems.
 
 ## Known endpoint differences
 

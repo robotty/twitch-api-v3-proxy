@@ -14,6 +14,19 @@ repositories {
     jcenter()
 }
 
+def addConfig = {
+    into('twitch-api-v3-proxy-boot') {
+        from 'src/dist'
+        include '*'
+    }
+}
+
+distZip.enabled = false
+distTar.enabled = false
+
+bootDistTar addConfig
+bootDistZip addConfig
+
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.SR2"
