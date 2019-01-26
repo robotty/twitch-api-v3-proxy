@@ -38,7 +38,6 @@ For a fresh install:
 
 If you are upgrading (where you dont want to override the configuration file):
 
-    sudo mkdir /opt/twitch-api-v3-proxy
     sudo tar xvf twitch-api-v3-proxy-boot.tar \
       -C /opt/twitch-api-v3-proxy \
       --strip-components=1 \
