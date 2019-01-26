@@ -210,11 +210,12 @@ public class ApiResponseController {
         }
 
         String statusLine = String.format("twitch-api-v3-proxy online for %s, %d usernames in cache, %d requests served, " +
-                        "Memory: %s, running on host %s, %s",
+                        "Memory: %s (%s allocated), running on host %s, %s",
                 formattedUptime,
                 mapper.getUserIdResolver().getCacheCount(),
                 requestCounter.get(),
-                humanReadableByteCount(Runtime.getRuntime().totalMemory(), true),
+                humanReadableByteCount(usedMemory, true),
+                humanReadableByteCount(totalMemory, true),
                 InetAddress.getLocalHost().getHostName(),
                 exceptionMessage);
 
