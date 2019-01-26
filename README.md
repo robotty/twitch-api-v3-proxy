@@ -18,7 +18,7 @@ Other distributions - google yourself!
 ## Download
 
 Download ready-made artifacts that work on all platforms here:
-https://github.com/zwb3/twitch-api-v3-proxy/releases/latest
+https://github.com/zwb3/twitch-api-v3-proxy/releases/tag/release
 
 You can use these downloads instead of building the project
 yourself if your only aim is to run the project.
@@ -31,6 +31,7 @@ start scripts.
 
 For a fresh install:
 
+    wget https://github.com/zwb3/twitch-api-v3-proxy/releases/download/release/twitch-api-v3-proxy-boot.tar
     sudo mkdir /opt/twitch-api-v3-proxy
     sudo tar xvf twitch-api-v3-proxy-boot.tar \
       -C /opt/twitch-api-v3-proxy \
@@ -38,6 +39,7 @@ For a fresh install:
 
 If you are upgrading (where you dont want to override the configuration file):
 
+    wget https://github.com/zwb3/twitch-api-v3-proxy/releases/download/release/twitch-api-v3-proxy-boot.tar
     sudo tar xvf twitch-api-v3-proxy-boot.tar \
       -C /opt/twitch-api-v3-proxy \
       --strip-components=1 \
