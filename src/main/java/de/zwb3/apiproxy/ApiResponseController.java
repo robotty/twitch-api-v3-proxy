@@ -1,6 +1,7 @@
 package de.zwb3.apiproxy;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.Header;
 import org.apache.http.HeaderIterator;
 import org.apache.http.HttpEntity;
@@ -26,9 +27,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -169,18 +173,89 @@ public class ApiResponseController {
 
     @RequestMapping(value = "/apiproxy/status", produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
-    public String statusMessage() {
+    public String statusMessage() throws UnknownHostException {
+
+
         RuntimeMXBean rb = ManagementFactory.getRuntimeMXBean();
         // in milliseconds
         long uptime = rb.getUptime();
         Duration uptimeDuration = Duration.ofMillis(uptime);
         String formattedUptime = formatUptimeDuration(uptimeDuration);
 
-        String statusLine = "twitch-api-v3-proxy online for " + formattedUptime + ", " +
-                mapper.getUserIdResolver().getCacheCount() + " usernames in cache, " +
-                requestCounter.get() + " requests served!";
+        // do garbage collection (twice, because that was recommended somewhere) go get consistent memory numbers.
+        System.gc();
+        System.gc();
+
+        Runtime runtime = Runtime.getRuntime();
+        long freeMemory = runtime.freeMemory();
+        long totalMemory = runtime.totalMemory();
+        // currently in use is totalMemory - freeMemory
+        // currently allocated at the system level is totalMemory
+        // the maximum amount of memory the JVM will ever allocate/use is maxMemory
+        long usedMemory = totalMemory - freeMemory;
+
+        Pair<Instant, Throwable> lastException = mapper.getUserIdResolver().getLastException();
+        String exceptionMessage;
+        // left = timestamp of last exception, right = the exception
+        if (lastException.getLeft() != null && lastException.getRight() != null) {
+
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss O", Locale.ROOT)
+//                    .withZone(ZoneOffset.UTC);
+//            String lastExceptionTimeFormatted = formatter.format(lastException.getLeft());
+
+            String timeSinceLastException = formatUptimeDuration(Duration.between(lastException.getLeft(), Instant.now()));
+            exceptionMessage = "last exception in the user ID resolver was " + timeSinceLastException + " ago";
+        } else {
+            exceptionMessage = "no last exception in the user ID resolver";
+        }
+
+        String statusLine = String.format("twitch-api-v3-proxy online for %s, %d usernames in cache, %d requests served, " +
+                        "Memory: %s, running on host %s, %s",
+                formattedUptime,
+                mapper.getUserIdResolver().getCacheCount(),
+                requestCounter.get(),
+                humanReadableByteCount(Runtime.getRuntime().totalMemory(), true),
+                InetAddress.getLocalHost().getHostName(),
+                exceptionMessage);
 
         return statusLine;
+    }
+
+    /**
+     * utility method to format a number of bytes into a human readable representation.
+     * <p>
+     * Example return values:
+     * <pre><code>
+     *                               SI     BINARY
+     *
+     *                    0:        0 B        0 B
+     *                   27:       27 B       27 B
+     *                  999:      999 B      999 B
+     *                 1000:     1.0 kB     1000 B
+     *                 1023:     1.0 kB     1023 B
+     *                 1024:     1.0 kB    1.0 KiB
+     *                 1728:     1.7 kB    1.7 KiB
+     *               110592:   110.6 kB  108.0 KiB
+     *              7077888:     7.1 MB    6.8 MiB
+     *            452984832:   453.0 MB  432.0 MiB
+     *          28991029248:    29.0 GB   27.0 GiB
+     *        1855425871872:     1.9 TB    1.7 TiB
+     *  9223372036854775807:     9.2 EB    8.0 EiB   (Long.MAX_VALUE)
+     * </code></pre>
+     * <p>
+     * See: <a href="https://stackoverflow.com/a/3758880">Implementation source</a>.
+     *
+     * @param bytes Number of bytes.
+     * @param si    {@code true} to use 1024-based units (KiB, MiB, etc.), {@code false} to use 1000-based units
+     *              (KB, MB, etc.)
+     * @return A human-readable representation of the given number of bytes.
+     */
+    public static String humanReadableByteCount(long bytes, boolean si) {
+        int unit = si ? 1000 : 1024;
+        if (bytes < unit) return bytes + " B";
+        int exp = (int) (Math.log(bytes) / Math.log(unit));
+        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp - 1) + (si ? "" : "i");
+        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
     }
 
     public static final int SECONDS_PER_MINUTE = 60;

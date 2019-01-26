@@ -7,10 +7,15 @@ import com.google.common.cache.Weigher;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
+import net.jcip.annotations.GuardedBy;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -26,6 +31,20 @@ public class UserIdResolver {
     private final String clientId;
 
     /**
+     * Time of the last errored user ID lookup.
+     */
+    @GuardedBy("this")
+    @Nullable
+    private volatile Instant lastExceptionTime;
+
+    /**
+     * Last exception (will pretty much always be an {@link ExecutionException})
+     */
+    @GuardedBy("this")
+    @Nullable
+    private Throwable lastException;
+
+    /**
      * @param clientId Client API to make requests with.
      */
     public UserIdResolver(String clientId) {
@@ -38,8 +57,11 @@ public class UserIdResolver {
     private final LoadingCache<String, Optional<Long>> userIdCache =
             CacheBuilder.newBuilder()
                     // weighs entries in bytes
+                    // note that each entry has a implementation-dependendant overhead,
+                    // which is why the "512KiB" maximum should be taken with a big grain of salt
+                    // in reality this cache should be expected to take 10 MiB of memory absolutely max.
                     .weigher((Weigher<String, Optional<Long>>) (key, value) -> key.length() + 8)
-                    .maximumWeight(64 * 1024 * 1024) // 64 MB, TODO config
+                    .maximumWeight(512 * 1024) // 512KiB, TODO config
                     .expireAfterWrite(7, TimeUnit.DAYS)
                     .build(new CacheLoader<String, Optional<Long>>() {
                         @Override
@@ -104,7 +126,22 @@ public class UserIdResolver {
      * @throws ExecutionException If there was an error querying the username from the API.
      */
     public Optional<Long> translateUsername(String username) throws ExecutionException {
-        return userIdCache.get(username);
+        try {
+            return userIdCache.get(username);
+        } catch (Exception e) {
+            synchronized(this) {
+                lastExceptionTime = Instant.now();
+                lastException = e.getCause();
+            }
+            throw e;
+        }
+    }
+
+    /**
+     * @return the time and throwable of the last exception that occurred during user ID lookup.
+     */
+    public synchronized Pair<Instant, Throwable> getLastException() {
+        return new ImmutablePair<>(lastExceptionTime, lastException);
     }
 
     /**
