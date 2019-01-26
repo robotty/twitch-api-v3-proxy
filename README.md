@@ -62,6 +62,20 @@ You can also set a different host and address to have the webserver listen on.
     # run as www-data for security reasons!
     sudo -u www-data ./bin/twitch-api-v3-proxy
 
+## systemd service file
+
+Example systemd is provided in the repo as `twitch-api-v3-proxy.service`.
+
+Install the service:
+
+    sudo wget "https://raw.githubusercontent.com/zwb3/twitch-api-v3-proxy/master/twitch-api-v3-proxy.service" \
+      -O "/etc/systemd/system/twitch-api-v3-proxy.service"
+    sudo systemctl daemon-reload
+    sudo systemctl enable twitch-api-v3-proxy
+    sudo systemctl start twitch-api-v3-proxy
+    # check the status
+    sudo systemctl status twitch-api-v3-proxy
+
 ## Usage with pajbot1
 
 If you are planning on using this proxy service with pajbot1,
@@ -111,10 +125,6 @@ have to patch these differences in your application!)
     
     `rootObject["preview"]` is different, use `rootObject["preview"]["medium"]`
     to get the original behaviour.
-
-## systemd service filem
-
-Example systemd is provided in the repo as `apiproxy.service`.
 
 ## How it works
 
