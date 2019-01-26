@@ -41,7 +41,7 @@ If you are upgrading (where you dont want to override the configuration file):
     sudo tar xvf twitch-api-v3-proxy-boot.tar \
       -C /opt/twitch-api-v3-proxy \
       --strip-components=1 \
-      --exclude='./twitch-api-v3-proxy-boot/application.properties'
+      --exclude='twitch-api-v3-proxy-boot/application.properties'
 
 ## Configure
 
