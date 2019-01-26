@@ -3,18 +3,6 @@
 Provides continued support to projects using Twitch API v3 by providing the legacy API
 at a local endpoint.
 
-## Download
-
-Download ready-made artifacts that work on all platforms here:
-https://github.com/zwb3/twitch-api-v3-proxy/releases/latest
-
-You can use these downloads instead of building the project
-yourself if your only aim is to run the project.
-
-I recommend downloading the `twitch-api-v3-proxy-boot.tar`
-(or zip if you prefer) for a full package including
-start scripts.
-
 ## Install Java 8
 
 Java 8 is required, older releases are not supported.
@@ -26,6 +14,18 @@ On Debian, for example:
     java -version
 
 Other distributions - google yourself!
+
+## Download
+
+Download ready-made artifacts that work on all platforms here:
+https://github.com/zwb3/twitch-api-v3-proxy/releases/latest
+
+You can use these downloads instead of building the project
+yourself if your only aim is to run the project.
+
+I recommend downloading the `twitch-api-v3-proxy-boot.tar`
+(or zip if you prefer) for a full package including
+start scripts.
 
 ## Unzip
 
