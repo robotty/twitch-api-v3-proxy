@@ -47,7 +47,7 @@ If you are upgrading (where you dont want to override the configuration file):
 
 If you downloaded a dist zip/tar, the application.properties
 will be included inside the zip/tar. If you are building from source,
-copy it from `./src/dist/application.properties.`
+copy it from `./src/dist/application.properties`.
 
 Edit `application.properties` with your own client ID.
 This client ID is used to look up usernames to user IDs.
