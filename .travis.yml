@@ -18,3 +18,4 @@ deploy:
     - "./build/libs/*"
   on:
     repo: zwb3/twitch-api-v3-proxy
+    tags: true
