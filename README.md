@@ -38,6 +38,11 @@ For the actual API requests, the proxy passes on your existing sent
 
 You can also set host and address to have the webserver listen on.
 
+Note: If the application.properties is not present in the
+working directory, you will get an error message like this:
+
+> `ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'apiResponseController' defined in URL [jar:file:/C:/Users/username/Projects/twitch-api-v3-proxy/build/libs/twitch-api-v3-proxy.jar!/BOOT-INF/classes!/de/zwb3/apiproxy/ApiResponseController.class]: Unexpected exception during bean creation; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'clientId' in value "${clientId}"`
+
 ## Run
 
 Ensure you have a Java 8 JRE installed, and run:
