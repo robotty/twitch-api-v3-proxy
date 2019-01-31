@@ -70,7 +70,7 @@ Example systemd is provided in the repo as `twitch-api-v3-proxy.service`.
 
 Install the service:
 
-    sudo wget "https://raw.githubusercontent.com/zwb3/twitch-api-v3-proxy/master/twitch-api-v3-proxy.service" \
+    sudo wget "https://raw.githubusercontent.com/zwb3/twitch-api-v3-proxy/release/twitch-api-v3-proxy.service" \
       -O "/etc/systemd/system/twitch-api-v3-proxy.service"
     sudo systemctl daemon-reload
     sudo systemctl enable twitch-api-v3-proxy
