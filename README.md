@@ -171,7 +171,7 @@ corresponding user ID `22484632`.
 The username -> user ID translation is performed by the class `UserIdResolver`,
 which is initialized with the client ID from the config file.
 This class contains a google guava (this is a Java library) `LoadingCache`,
-which performs caching with up to 64 MB of cache size and entries expiring
+which performs caching with up to 512 KiB of cache size and entries expiring
 after 7 days. (hardcoded)
 
 The method will return its mapped API path (`/kraken/channels/22484632`),
