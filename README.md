@@ -82,7 +82,7 @@ Install the service:
 
 If you are planning on using this proxy service with pajbot1,
 update your pajbot1 with the latest patches from:
-https://github.com/pajlada/pajbot
+https://github.com/pajbot/pajbot
 
 ## Usage
 
