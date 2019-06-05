@@ -24,10 +24,10 @@ GET /kraken/channels/:channel/teams
 # FEEDs are no longer supported. /feed endpoints are not included here.
 
 # CHAT
-GET /kraken/chat/:channel
-GET /kraken/chat/:channel/badges
 GET /kraken/chat/emoticons
 GET /kraken/chat/emoticon_images
+GET /kraken/chat/:channel
+GET /kraken/chat/:channel/badges
 
 # FOLLOWS
 GET /kraken/channels/:channel/follows
